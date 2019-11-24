@@ -2,19 +2,15 @@ import React from 'react';
 import './Header.css';
 
 
-const Header = function(props){
+const Header = function(){
 
-    return (<div className='header'>
-        <span className="header-text">{props.heading}</span>
+    return (
 
-       <div className={props.searchDisplay}><span className={props.noSearchBox}>{props.searchDisplay}</span></div>
-       <div className={props.iconDisplay}>
-       <Link to="/profile/">
-        <img src={logo}/>{props.logo}
-        </Link>
-      </div>
+                <div className='header'>
+                   <div className="header-text">Image Viewer</div>
+                </div>
 
-      </div>);
-}
+
+ );}
 
 export default Header;
