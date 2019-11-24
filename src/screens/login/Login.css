@@ -1,0 +1,18 @@
+.card-container{
+    height:80px;
+    width:380px;
+    padding:120px 0 0 650px;
+    align-self:center;
+}
+
+.red {
+    color: red;
+}
+
+.dispNone{
+    display:none;
+}
+
+.dispBlock{
+    display:flex;
+}
