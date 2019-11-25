@@ -16,3 +16,7 @@
 .dispBlock{
     display:flex;
 }
+
+.successText{
+    display:block;
+}
