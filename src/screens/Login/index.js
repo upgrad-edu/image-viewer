@@ -82,10 +82,10 @@ class Login extends Component {
 								<InputLabel htmlFor="password"> Password </InputLabel>
 								<Input id="password" type="password" onChange={this.inputPasswordChangeHandler} />
 								<FormHelperText className={styles[passwordRequired]}><span className={styles.red}>required</span></FormHelperText>
-							</FormControl><br /><br />
-							<Button variant="contained" color="primary" onClick={this.loginClickHandler} className={classes.login__btn}>LOGIN</Button>
-							<br />
+							</FormControl><br />
 							<FormHelperText className={styles[credentialsMismatchError]}><span className={styles.red}>Incorrect username and/or password</span></FormHelperText>
+							<br />
+							<Button variant="contained" color="primary" onClick={this.loginClickHandler} className={classes.login__btn}>LOGIN</Button>
 						</CardContent>
 					</Card>
 				</div>
