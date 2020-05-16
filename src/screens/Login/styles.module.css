@@ -1,0 +1,29 @@
+.login {
+	width:calc(100% -  24px);
+  margin:auto;
+	text-align:left;
+	transform: translate(-50%,-50%);
+	position: absolute;
+	left: 50%;
+	top:50%;
+}
+
+@media  only screen and (min-width:768px) {
+	.login {
+		width:500px;
+	  padding:2.5rem;
+	}
+}
+
+.dispNone{
+	display:none;
+}
+
+.dispBlock {
+	display: block;
+}
+
+.red
+{
+	color: red;
+}
