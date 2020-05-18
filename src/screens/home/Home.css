@@ -1,0 +1,36 @@
+.cardContainer .card {
+    width: 46%;
+    margin: 1rem;
+    display: inline-block;
+}
+
+.cardContainer {
+    margin: 0 auto;
+    width: 89%;
+}
+
+.cardContent .tag {
+    color: #1976d2;
+}
+
+.cardContent .likes {
+    display: flex;
+}
+
+.likesIcon {
+    cursor: pointer;
+}
+
+.commentForm .cardContent {
+    display: inline-block;
+}
+
+.inputComment .cardContent .commentForm {
+    margin-right: 1.1rem;
+    width: 84%;
+}
+
+.cardContent .post {
+    max-height: 249px;
+    width: 101%;
+}

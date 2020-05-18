@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import Header from "../../common/Header";
-import "./Login.css";
+import Header from '../../common/Header';
+import './Login.css';
 import {
     Card,
     FormControl,
     Input,
     InputLabel,
     Button
-} from "@material-ui/core";
+} from '@material-ui/core';
 
 export default class Login extends Component {
     constructor(props) {
@@ -29,12 +29,13 @@ export default class Login extends Component {
 
     handleLogin = () => {
         const {username, password} = this.state;
-        const credential = 'credential';
+        const pwd = 'password';
+        const name = 'username';
         if (username === '' && password === '') {
             this.setState({isEmptyUsername: true, isEmptyPassword: true});
         } else {
             this.setState({isEmptyUsername: false, isEmptyPassword: false, validateCredentials: true});
-            if (username === credential && password === credential) {
+            if (username === name && password === pwd) {
                 this.setState({isValidated: true});
                 sessionStorage.setItem('accessToken', '8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784');
                 window.location = '/home';
