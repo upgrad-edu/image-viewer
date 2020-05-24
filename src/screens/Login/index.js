@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { LoggedInHeader } from './../../components';
-
+import styles from './styles.css';
 import Grid from '@material-ui/core';
 import withStyles from '@material-ui/core';
 import Container from '@material-ui/core';
