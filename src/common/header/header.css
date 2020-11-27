@@ -21,3 +21,9 @@
   justify-content: center;
   align-items: center;
 }
+.MuiPopover-paper {
+  top: 58px !important;
+}
+.avatar-menu{
+  padding-left: 20px;
+}

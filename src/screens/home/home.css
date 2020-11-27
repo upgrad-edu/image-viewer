@@ -1,16 +1,12 @@
 .home-container {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
 }
 .home-container .MuiCard-root {
-  width: 45%;
+  width: calc(100vw/2 - 40px);
   margin: 20px;
 }
-.avatar-container {
-  display: flex;
-  align-items: center;
-}
+
 .home-container .MuiCard-root img {
   width: 100%;
 }
@@ -20,4 +16,16 @@
   justify-content: center;
   padding-left: 20px;
   height: 42px;
+}
+
+.hashtag {
+  color: blue;
+  cursor: pointer;
+  padding-right: 10px;
+}
+.likes-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
 }

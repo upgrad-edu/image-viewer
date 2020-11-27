@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import "./index.css";
-import { TextField, Menu, MenuItem, Avatar } from "@material-ui/core";
+import "./header.css";
+import { TextField, Menu, MenuItem, Avatar, Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import AppContext from "../app-context";
 import PROFILE_ICON from "../../assets/profile_icon.png";
-
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn, searchKey, setSearchKey } = useContext(
@@ -14,6 +13,16 @@ const Header = () => {
   const history = useHistory();
 
   const [menuOpened, setMenuOpened] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     if (sessionStorage.getItem("access_token")) {
@@ -25,7 +34,7 @@ const Header = () => {
   }, []);
 
   const logoutHandler = () => {
-    setMenuOpened(false);
+    handleClose();
     sessionStorage.removeItem("access_token");
     setIsLoggedIn(false);
     history.push("/");
@@ -47,27 +56,26 @@ const Header = () => {
               startAdornment: <SearchIcon />
             }}
           />
-          <div>
-            <Avatar src={PROFILE_ICON} onClick={() => setMenuOpened(true)} />
-            <div>
-              <Menu
-                id="menu-appbar"
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
+          <div className="avatar-menu">
+            <Avatar src={PROFILE_ICON} onClick={handleClick} />
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  history.push("/profile");
                 }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={menuOpened}
-                onClose={() => setMenuOpened(false)}
               >
-                <MenuItem>My Account</MenuItem>
-                <hr />
-                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
-              </Menu>
-            </div>
+                My Account
+              </MenuItem>
+              <hr />
+              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+            </Menu>
           </div>
         </div>
       )}

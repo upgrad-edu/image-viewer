@@ -1,5 +1,3 @@
-import { DATA } from "../mock";
-
 const HOST_NAME = "https://graph.instagram.com/";
 
 const getAccessToken = () => {
