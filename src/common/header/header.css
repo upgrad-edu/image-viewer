@@ -1,0 +1,29 @@
+.header-container {
+  height: 70px;
+  padding: 0px 20px;
+  background-color: #263238;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.app-logo {
+  color: #fff;
+  font-size: 18px;
+  padding-left: 10px;
+}
+.header-container .MuiInputBase-root {
+  background-color: #c0c0c0;
+  height: 40px;
+  width: 300px;
+}
+.header-container .right-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MuiPopover-paper {
+  top: 58px !important;
+}
+.avatar-menu{
+  padding-left: 20px;
+}

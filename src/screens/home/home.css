@@ -1,0 +1,31 @@
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.home-container .MuiCard-root {
+  width: calc(100vw/2 - 40px);
+  margin: 20px;
+}
+
+.home-container .MuiCard-root img {
+  width: 100%;
+}
+.username-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+  height: 42px;
+}
+
+.hashtag {
+  color: blue;
+  cursor: pointer;
+  padding-right: 10px;
+}
+.likes-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
