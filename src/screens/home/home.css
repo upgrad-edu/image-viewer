@@ -27,5 +27,9 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding-top: 20px;
+  padding: 20px 0px;
+}
+.comments-container{
+  display: flex;
+  padding-top: 20px;  
 }

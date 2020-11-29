@@ -8,7 +8,7 @@ import {
   InputLabel,
   Button
 } from "@material-ui/core";
-import "./index.css";
+import "./login.css";
 import AppContext from "../../common/app-context";
 
 const USER_DETAILS = {

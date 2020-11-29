@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import "./header.css";
-import { TextField, Menu, MenuItem, Avatar, Button } from "@material-ui/core";
+import { TextField, Menu, MenuItem, Avatar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import AppContext from "../app-context";
 import PROFILE_ICON from "../../assets/profile_icon.png";
@@ -11,9 +11,6 @@ const Header = () => {
     AppContext
   );
   const history = useHistory();
-
-  const [menuOpened, setMenuOpened] = useState(false);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {

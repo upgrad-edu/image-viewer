@@ -3,27 +3,35 @@ import "./home.css";
 import { formatDate } from "../../common/utilities";
 import { getAllMyMedia } from "../../common/api";
 import PROFILE_ICON from "../../assets/profile_icon.png";
-import { Card, CardContent, Avatar, CardHeader } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  Avatar,
+  CardHeader,
+  Button,
+  FormControl,
+  Input,
+  InputLabel
+} from "@material-ui/core";
 import AppContext from "../../common/app-context";
-import { DATA } from "../../common/mock";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
-import Sample_img from "../../assets/sample_img.png";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const Home = () => {
   const { searchKey } = useContext(AppContext);
-  const [imagesResponse, setImagesResponse] = useState(DATA.data);
-  const [filteredData, setFilteredData] = useState(DATA.data);
+  const [imagesResponse, setImagesResponse] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [comments, setComments] = useState({});
 
-  // useEffect(() => {
-  //   getAllMyMedia()
-  //     .then(res => {
-  //       debugger;
-  //       setImagesResponse(res.data || []);
-  //     })
-  //     .catch(error => {
-  //       console.log("get all image error", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getAllMyMedia()
+      .then(res => {
+        setImagesResponse(mockResponse(res.data || []));
+      })
+      .catch(error => {
+        console.log("get all image error", error);
+      });
+  }, []);
 
   const mockResponse = response => {
     return response.map(item => {
@@ -34,13 +42,18 @@ const Home = () => {
         item.caption = "No caption added";
       }
 
-      item.likes = 0;
+      if (!item.comments) {
+        item.comments = [];
+      }
+      if (!item.likes) {
+        item.likes = Math.floor(Math.random() * 10);
+      }
+
       return item;
     });
   };
 
   useEffect(() => {
-    debugger;
     if (searchKey) {
       let results = imagesResponse.filter(image =>
         (image.caption || "").includes(searchKey)
@@ -50,13 +63,37 @@ const Home = () => {
     } else {
       setFilteredData(imagesResponse);
     }
-  }, [searchKey, imagesResponse]);
+  }, [imagesResponse]);
 
   const likeHandler = postId => {
     imagesResponse.forEach(item => {
       if (item.id === postId) {
-        item.likes++;
+        if (item.likedByme) {
+          item.likes--;
+          item["likedByme"] = false;
+        } else {
+          item.likes++;
+          item["likedByme"] = true;
+        }
       }
+    });
+    setImagesResponse([...imagesResponse]);
+  };
+
+  const commentHandler = postId => {
+    debugger;
+    imagesResponse.forEach(item => {
+      debugger;
+      if (item.id === postId) {
+        item.comments.push({
+          username: item.username,
+          comment: comments[postId]
+        });
+      }
+    });
+    setComments({
+      ...comments,
+      [postId]: ""
     });
     setImagesResponse([...imagesResponse]);
   };
@@ -81,15 +118,59 @@ const Home = () => {
               <div>
                 {item.hashtags &&
                   item.hashtags.map(hashtag => {
-                    return <span className="hashtag" key={hashtag}>#{hashtag}</span>;
+                    return (
+                      <span className="hashtag" key={hashtag}>
+                        #{hashtag}
+                      </span>
+                    );
                   })}
               </div>
               <div
                 className="likes-container"
                 onClick={() => likeHandler(item.id)}
               >
-                <FavoriteBorderOutlinedIcon />
+                {item.likedByme ? (
+                  <FavoriteIcon style={{ color: "red" }} />
+                ) : (
+                  <FavoriteBorderOutlinedIcon />
+                )}
                 {item.likes && <span>{item.likes} likes</span>}
+              </div>
+              <div>
+                {item.comments.map((comment, index) => {
+                  return (
+                    <div key={index}>
+                      <strong>{comment.username}</strong>:
+                      <span>{comment.comment}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="comments-container">
+                <FormControl fullWidth={true}>
+                  <InputLabel htmlFor="my-input">Add comment</InputLabel>
+                  <Input
+                    type="text"
+                    id="my-input"
+                    value={comments[item.id] || ""}
+                    onChange={event => {
+                      setComments({
+                        ...comments,
+                        [item.id]: event.target.value
+                      });
+                    }}
+                    aria-describedby="my-helper-text"
+                  />
+                </FormControl>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth={false}
+                  onClick={() => commentHandler(item.id)}
+                >
+                  ADD
+                </Button>
               </div>
             </CardContent>
           </Card>
