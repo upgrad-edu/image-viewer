@@ -1,0 +1,15 @@
+
+.cardStyle {
+    min-width: 275px;
+}
+
+.dispNone {
+    display: none;
+}
+
+.dispBlock {
+    display: block;
+}
+.red {
+    color:red;
+}
