@@ -1,0 +1,92 @@
+.info-section {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+    padding-right: 8%;
+}
+
+.avatar {
+    width: 130px;
+    height: 130px;
+}
+
+.profile-details {
+    padding-left: 3%;
+}
+
+.middle-line {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-top: 8px;
+}
+
+.modal-heading {
+    padding-top: 10px;
+}
+
+.dispNone {
+    display: none;
+}
+
+.dispBlock {
+   display: block;
+}
+
+.required {
+    color: red;
+}
+
+.modal > div:first-child {
+    background-color: white !important;
+    opacity: 0.7 !important;
+}
+
+.modal {
+    display: 'flex';
+    align-items: 'center';
+    justify-content: 'center';
+}
+
+.image-section {
+    margin: 40px 70px;
+}
+
+.image-modal-left {
+    padding-right: 15px;
+}
+
+.image-modal-right {
+    width: 50%;
+}
+.modal-media-img {
+    width: 400px;
+    height: auto;
+}
+
+.media-header {
+    display: flex;
+}
+
+.media-dtl-divider {
+    margin: 10px 0;
+}
+
+.media-caption {
+    margin-bottom: 15px;
+}
+
+.modal-comment-section {
+    height: 220px;
+}
+
+.modal-media-icon-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-comment-form-control {
+    width: 310px;
+    margin-right: 10px;
+}
