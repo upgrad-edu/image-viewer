@@ -1,0 +1,19 @@
+.main-header{    
+    position: relative;
+    background-color: #263238;
+    height: 50px;    
+}
+
+.main-header-logo{      
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translate(-50%,-50%);
+    color: #fff;          
+    vertical-align: middle;
+}
+
+#main-header-logo-text{
+    font-size: 18px; 
+    vertical-align: middle;  
+}
