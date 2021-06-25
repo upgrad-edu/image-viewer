@@ -2,10 +2,7 @@ import { Component } from "react";
 import React from 'react'
 import './Header.css'
 
-class Header extends Component {
-    constructor() {
-        super();
-    }
+class Header extends Component {   
 
     render() {
         return (
