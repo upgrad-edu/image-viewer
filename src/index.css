@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.login-card{  
+  right : 50%;
+  left : 50%;
+  position: absolute;
+  width: 300px;
+}
+
+.login-card-container{
+  position: relative;
+}

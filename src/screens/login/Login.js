@@ -7,7 +7,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-//import './Login.css'
+import './Login.css'
 
 class Login extends Component {
     constructor() {
@@ -20,12 +20,34 @@ class Login extends Component {
             loginPassword: "",
             registrationSuccess: false,
             loggedIn: sessionStorage.getItem("access-token") == null ? false : true
+        };     
+        this.loginClickHandler = this.loginClickHandler.bind(this);
+        this.inputUsernameChangeHandler = this.inputUsernameChangeHandler.bind(this);
+        this.inputLoginPasswordChangeHandler = this.inputLoginPasswordChangeHandler.bind(this);
+    }
+
+    loginClickHandler() {
+        let userName = "admin";
+        let passWord = "admin";
+        //let access = "instagram accesss token";
+        if(this.state.username === userName && this.state.loginPassword === passWord) { 
+            alert("Success!");
+            sessionStorage.setItem("access-token", "InstaAccount");
         }
+    }
+
+    inputUsernameChangeHandler = event => {
+       this.setState({ username: event.target.value });
+    }
+
+    inputLoginPasswordChangeHandler = event => {
+        this.setState({ loginPassword: event.target.value });
     }
 
     render() {
         return (
-            <Card class="card-content">
+            <Card>
+                <div>LOGIN</div>
                 <FormControl required>
                     <InputLabel htmlFor="username">Username</InputLabel>
                     <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler} />
@@ -34,7 +56,7 @@ class Login extends Component {
                     </FormHelperText>
                 </FormControl>
                 <br /><br />
-                <FormControl required>
+                <FormControl required>  
                     <InputLabel htmlFor="loginPassword">Password</InputLabel>
                     <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
                     <FormHelperText className={this.state.loginPasswordRequired}>

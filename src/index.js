@@ -5,9 +5,14 @@ import Login from './screens/login/Login';
 import './index.css';
 
 ReactDOM.render(
-    <div>
-        <Header />
-        <Login />
+    <div className="login-card-container">
+        <div className="login-card-header">
+            <Header />
+        </div>        
+        <div className="login-card">
+            <Login />
+        </div>
+
     </div>
     ,
     document.getElementById('root')
