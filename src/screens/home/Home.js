@@ -1,24 +1,53 @@
-import { Component } from "react";
-import React from 'react'
-//import './Header.css'
+import React, {Component} from 'react';
+import './Home.css';
+import Header from '../../common/header/Header';
 
-class Home extends Component {   
 
-    render() {
-        return (
-            <div class="main-header">
-                <div class="main-header-logo">
-                    <span id="main-header-logo-text">Image Viewer</span>
-                </div>
-                <div class="main-header-searcher">
-                    <div>
-                       
-                    </div>
-                </div>
+class Home extends Component{
 
-            </div>
-        )
+  constructor(props) {
+    super(props);
+    if (sessionStorage.getItem('access-token') == null) {
+      props.history.replace('/');
     }
-}
+    this.state = {
+      data: [],
+      filteredData:[],
+      userData:[],
+      likeSet:new Set(),
+      comments:{},
+      currrentComment:"",
+      userInfo:[],
+      likes: 0
+    }
+  }
 
-export default Home;
+  componentDidMount(){
+    this.getBaseUserInfo();
+  }
+
+  render(){
+    const{classes} = this.props;
+    return(
+      <div>
+        <Header
+          userProfileUrl="profile.png"
+          screen={"Home"}
+          searchHandler={this.onSearchEntered}
+          handleLogout={this.logout}
+          handleAccount={this.navigateToAccount}/>
+        <div className={classes.grid}>
+          <GridList className={classes.gridList} cellHeight={'auto'}>
+            {this.state.filteredData.map((item, index) => (
+              <GridListTile key={item.id}>                
+              </GridListTile>
+            ))}
+          </GridList>
+        </div>
+      </div>
+    );
+  }
+}  
+
+export default Home
+
