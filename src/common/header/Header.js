@@ -10,6 +10,12 @@ class Header extends Component {
                 <div class="main-header-logo">
                     <span id="main-header-logo-text">Image Viewer</span>
                 </div>
+                <div class="main-header-searcher">
+                    <div>
+                        <Input></Input>
+                    </div>
+                </div>
+
             </div>
         )
     }

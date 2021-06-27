@@ -1,11 +1,14 @@
 import React from 'react'
 import { Component } from "react";
 import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import FormHelperText from '@material-ui/core/FormHelperText';
+//import { Redirect } from 'react-router-dom';
 
 import './Login.css'
 
@@ -33,6 +36,7 @@ class Login extends Component {
         if(this.state.username === userName && this.state.loginPassword === passWord) { 
             alert("Success!");
             sessionStorage.setItem("access-token", "InstaAccount");
+            window.location.href = "www.google.com";
         }
     }
 

@@ -1,20 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './common/Header';
-import Login from './screens/login/Login';
 import './index.css';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
-    <div className="login-card-container">
-        <div className="login-card-header">
-            <Header />
-        </div>        
-        <div className="login-card">
-            <Login />
-        </div>
-
-    </div>
-    ,
+    <BrowserRouter>
+    <App />
+</BrowserRouter>,
     document.getElementById('root')
 );
 
