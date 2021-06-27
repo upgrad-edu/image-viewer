@@ -85,7 +85,7 @@ class Home extends Component{
     return(
       <div>
         <Header
-          userProfileUrl="profile.png"
+          userProfileUrl="./../../assets/profile.png"
           screen={"Home"}
           searchHandler={this.onSearchEntered}
           handleLogout={this.logout}
@@ -114,9 +114,11 @@ class Home extends Component{
     console.log('search value', value);
     let filteredData = this.state.userInfo;
     filteredData = filteredData.filter((data) =>{
-      let string = data.caption.toLowerCase();
+     if(data !== null) {
+      let searchString = data.caption.toLowerCase();
       let subString = value.toLowerCase();
-      return string.includes(subString);
+      return searchString.includes(subString);
+     }
     })
     this.setState({
       userInfo: filteredData
@@ -256,7 +258,7 @@ class HomeItem extends Component{
                     </Typography>
                     <Typography style={{color:'#4dabf5'}} component="p" >
                       { /* Hard Coded Hashtags */ }
-                      #Tech #Saurabh #Nature #Earth #Peace
+                      #Tech #Serene #Divinity #Earth #Go Green
                     </Typography>
                   </div>
                 </CardContent>
