@@ -192,5 +192,157 @@ class Home extends Component{
   }
 }  
 
-export default Home
+class HomeItem extends Component{
+    constructor(){
+      super();
+      this.state = {
+        isLiked : false,
+        comment:'',
+        likes: 3
+      }
+    }
+  
+    render(){
+      const {classes, item, userInfo, comments} = this.props;
+  
+      // Convert Timestamp to required format
+  
+      let createdTime = new Date(item.timestamp);
+      let yyyy = createdTime.getFullYear();
+      let mm = createdTime.getMonth() + 1;
+      let dd = createdTime.getDate();
+  
+      let HH = createdTime.getHours();
+      let MM = createdTime.getMinutes();
+      let ss = createdTime.getSeconds();
+  
+      let time = dd+"/"+mm+"/"+yyyy+" "+HH+":"+MM+":"+ss;
+  
+      // Fetching the caption of the image via the API endpoint result
+      let captionText = '';
+      let likeCount = this.state.likes;
+      userInfo.forEach(data => {
+        if (data.id === item.id) {
+          captionText = data.caption;
+        }
+      });
+  
+      if(captionText === '') {
+        return(<div className="home-item-main-container"></div>);
+      } else {
+        return(
+            <div className="home-item-main-container">
+              <Card className={classes.card}>
+                <CardHeader
+                    avatar={
+                      <Avatar alt="User Profile Pic" src="profile.png" className={classes.avatar}/>
+                    }
+                    title={item.username}
+                    subheader={time}
+                />
+  
+                { /* Media URL value is fetched via the API endpoint and is diplayed below using item.media_url query */ }
+                <CardContent>
+                  <CardMedia
+                      className={classes.media}
+                      image={item.media_url}
+                      title=""
+                  />
+                  <div className={classes.hr}>
+                    <Typography component="p">
+  
+                      { /* Fetch Caption from API call */ }
+                      {captionText}
+                    </Typography>
+                    <Typography style={{color:'#4dabf5'}} component="p" >
+                      { /* Hard Coded Hashtags */ }
+                      #Tech #Saurabh #Nature #Earth #Peace
+                    </Typography>
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <IconButton aria-label="Add to favorites" onClick={this.onLikeClicked.bind(this,item.id)}>
+                    {this.state.isLiked && <FavoriteIconFill style={{color:'#F44336'}}/>}
+                    {!this.state.isLiked && <FavoriteIconBorder/>}
+                  </IconButton>
+                  <Typography component="p">
+  
+                    { /*   */ }
+                    {likeCount} likes
+                  </Typography>
+                </CardActions>
+  
+                <CardContent>
+                  {comments.hasOwnProperty(item.id) && comments[item.id].map((comment, index)=>{
+                    return(
+                        <div key={index} className="row">
+                          <Typography component="p" style={{fontWeight:'bold'}}>
+                            {sessionStorage.getItem('username')}:
+                          </Typography>
+                          <Typography component="p" >
+                            {comment}
+                          </Typography>
+                        </div>
+                    )
+                  })}
+                  <div className={classes.formControl}>
+                    <FormControl style={{flexGrow:1}}>
+                      <InputLabel htmlFor="comment">Add a comment</InputLabel>
+                      <Input id="comment" value={this.state.comment} onChange={this.commentChangeHandler}/>
+                    </FormControl>
+                    <FormControl class="commentAdd">
+                      <Button onClick={this.onAddCommentClicked.bind(this,item.id)}
+                              variant="contained" color="primary">
+                        ADD
+                      </Button>
+                    </FormControl>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+        )
+      }
+    }
+  
+    onLikeClicked = (id) => {
+      // Change Like Icon and Increment/Decrement likes counter
+      if (!this.state.isLiked) {
+        this.setState({
+          likes: this.state.likes + 1
+        })
+      } else {
+        this.setState({
+          likes: this.state.likes - 1
+        })
+      }
+      if (this.state.isLiked) {
+        this.setState({
+          isLiked:false
+        });
+      }else {
+        this.setState({
+          isLiked:true
+        });
+      }
+    }
+  
+    commentChangeHandler = (e) => {
+      this.setState({
+        comment:e.target.value,
+      });
+      this.props.commentChangeHandler(e);
+    }
+  
+    onAddCommentClicked = (id) => {
+      // Add comment
+      if (this.state.comment === "" || typeof this.state.comment === undefined) {
+        return;
+      }
+      this.setState({
+        comment:""
+      });
+      this.props.onAddCommentClicked(id);
+    }
+  }
+export default withStyles(styles)(Home);
 
