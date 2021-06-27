@@ -75,7 +75,15 @@ class Home extends Component{
         <div className={classes.grid}>
           <GridList className={classes.gridList} cellHeight={'auto'}>
             {this.state.filteredData.map((item, index) => (
-              <GridListTile key={item.id}>                
+              <GridListTile key={item.id}>   
+               <HomeItem
+                  classes={classes}
+                  item={item}
+                  userInfo={this.state.userInfo}
+                  onLikedClicked={this.likeClickHandler}
+                  onAddCommentClicked={this.addCommentClickHandler}
+                  commentChangeHandler={this.commentChangeHandler}
+                  comments={this.state.comments}/>             
               </GridListTile>
             ))}
           </GridList>
