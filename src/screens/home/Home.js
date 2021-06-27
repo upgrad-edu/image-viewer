@@ -1,6 +1,6 @@
 import { Component } from "react";
 import React from 'react'
-import './Header.css'
+//import './Header.css'
 
 class Home extends Component {   
 

@@ -47,12 +47,9 @@ class Login extends Component {
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 
-        if (this.state.username === "" || this.state.loginPassword === "") { return }
-
-        // Set the default username and password here
-        // Set the access token here 
-        // Validate credentials and redirect to home
+        if (this.state.username === "" || this.state.loginPassword === "") { return }        
         
+        // Setting the default username and Instagram access-token
         if (this.state.username === "admin" && this.state.loginPassword === "admin") {
             sessionStorage.setItem('username','admin');
             sessionStorage.setItem('access-token', 'IGQVJXR2I0U1NqUDZARb2FxRzZA6ODVfMlM5N2FweXZAqSk5VSm5YN2JUNVVkRmJlUld6LXJwOXRaaU1TeVlvTFJLTTd2OFFDeUVqeElaYkZAPdW50ZAU03UFdvS1MtM1RESlFnNGRqbFNmS2EtWUZACSU5fWEllTWhiV1VyZAjJB');
