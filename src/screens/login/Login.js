@@ -52,7 +52,7 @@ class Login extends Component {
         // Setting the default username and Instagram access-token
         if (this.state.username === "admin" && this.state.loginPassword === "admin") {
             sessionStorage.setItem('username', 'admin');
-            sessionStorage.setItem('access-token', 'IGQVJVcFI5Yk5ZAUFBVd3NUc0dER0lJZAXJfczB6UFFGV3pJRW13RV9GbEVoUk92QlNWZAlV1NlZAUOGRseGlENFVsMHBncWlQaG9hUS1iUE5JbGsxcWM2cU1tcXVjRlk4Y0todkJwNzJsYzQwWHZAYRFdsSgZDZD');
+            sessionStorage.setItem('access-token', 'IGQVJVcHBTb1otNldYY2pKbTlBby1UbjZAGSWNCa2s1ZA3BLM3BxZAGxvSlNRVjREVFEyNE9QVHBfWkZAHREg2dERfR280U0tzRUQycHdZATnJ2QWtPamg5ZAEpiYWlnMEJ1Umc0cjNvdzQ1RkY2bDd5Q3ZAZATgZDZD');
             this.setState({ loggedIn: true });
 
             // Redirect to Home
