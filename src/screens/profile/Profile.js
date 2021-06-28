@@ -296,7 +296,7 @@ class Profile extends Component {
                               {this.state.currentItem.caption}
                             </Typography>
                             <Typography style={{color:'#4dabf5'}} component="p" >
-                                #Nature #Earth #Peace
+                                #Tech #Serene #Divinity #Earth #Go Green
                             </Typography>
                             {this.state.comments.hasOwnProperty(this.state.currentItem.id) && this.state.comments[this.state.currentItem.id].map((comment, index)=>{
                               return(
