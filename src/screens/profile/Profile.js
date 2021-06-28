@@ -66,40 +66,135 @@ class Profile extends Component {
             likes: 3
         }
     }
+    componentDidMount(){
+        this.getBaseUserInfo();
+    }
+    
     getBaseUserInfo = () => {
         let that = this;
         let url = `${constants.userInfoUrl}=${sessionStorage.getItem('access-token')}`;
         return fetch(url,{
-            method:'GET',
+          method:'GET',
         }).then((response) =>{
             return response.json();
         }).then((jsonResponse) =>{
-            that.setState({
-                userInfo:jsonResponse.data
-            });
-            this.state.userInfo.map((data, index) => (
-                this.getMediaData(data.id)
-            ));
+          that.setState({
+            userInfo:jsonResponse.data
+          });
+          this.state.userInfo.map((data, index) => (
+              this.getMediaData(data.id)
+          ));
         }).catch((error) => {
-            console.log('error user data',error);
+          console.log('error user data',error);
         });
-    }
-
-    getMediaData = (id) => {
+      }
+    
+      getMediaData = (id) => {
         let that = this;
         let url = `${constants.userMediaUrl}/${id}?fields=id,media_type,media_url,username,timestamp&access_token=&access_token=${sessionStorage.getItem('access-token')}`;
         return fetch(url,{
-            method:'GET',
+          method:'GET',
         }).then((response) =>{
             return response.json();
         }).then((jsonResponse) =>{
-            that.setState({
-                filteredData: this.state.filteredData.concat(jsonResponse),
-                username: jsonResponse.username
-            })
+          that.setState({
+            filteredData: this.state.filteredData.concat(jsonResponse)
+          })
         }).catch((error) => {
-            console.log('error user data',error);
+          console.log('error user data',error);
         });
+      }
+
+    handleOpenEditModal = () => {
+        this.setState({ editOpen: true });
+    }
+
+    handleCloseEditModal = () => {
+        this.setState({ editOpen: false });
+    }
+
+    handleOpenImageModal = (event) => {
+        var result = this.state.userInfo.find(item => {
+            return item.id === event.target.id
+        })
+        var mediaResult = this.state.filteredData.find(item => {
+            return item.id === event.target.id
+        })
+        console.log(result);
+        this.setState({ imageModalOpen: true, currentItem: result, mediaData: mediaResult});
+    }
+
+    handleCloseImageModal = () => {
+        this.setState({ imageModalOpen: false });
+    }
+
+    inputFullNameChangeHandler = (e) => {
+        this.setState({
+            newFullName: e.target.value
+        })
+    }
+
+    updateClickHandler = () => {
+        if (this.state.newFullName === '') {
+            this.setState({ fullNameRequired: 'dispBlock'})
+        } else {
+            this.setState({ fullNameRequired: 'dispNone' })
+        }
+
+        if (this.state.newFullName === "") { return }
+
+        this.setState({
+            full_name: this.state.newFullName
+        })
+
+        this.handleCloseEditModal()
+    }
+
+    likeClickHandler = (id) =>{
+        // Changing Like Icon and incrementing / decrementing likes
+        if (!this.state.isLiked) {
+            this.setState({
+                likes: this.state.likes + 1
+            })
+        } else {
+            this.setState({
+                likes: this.state.likes - 1
+            })
+        }
+        if (this.state.isLiked) {
+            this.setState({
+                isLiked:false
+            });
+        }else {
+            this.setState({
+                isLiked:true
+            });
+        }
+    }
+
+    onAddCommentClicked = (id) => {
+      // Adding Comment to comments section
+      console.log('id',id);
+      if (this.state.currentComment === "" || typeof this.state.currentComment === undefined) {
+        return;
+      }
+
+      let commentList = this.state.comments.hasOwnProperty(id)?
+        this.state.comments[id].concat(this.state.currentComment): [].concat(this.state.currentComment);
+
+      this.setState({
+        comments:{
+          ...this.state.comments,
+          [id]:commentList
+        },
+        currentComment:''
+      })
+    }
+
+    commentChangeHandler = (e) => {
+      this.setState({
+        currentComment:e.target.value
+      });
     }
 
     logout = () => {
