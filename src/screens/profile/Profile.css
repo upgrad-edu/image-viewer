@@ -1,0 +1,12 @@
+.row {
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center
+}  
+
+.information-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}

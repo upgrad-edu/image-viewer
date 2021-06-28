@@ -29,7 +29,7 @@ const styles = {
 class Login extends Component {
     constructor() {
         super();
-        this.state = {           
+        this.state = {
             usernameRequired: "dispNone",
             username: "",
             loginPasswordRequired: "dispNone",
@@ -47,11 +47,11 @@ class Login extends Component {
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.loginPassword === "" ? this.setState({ loginPasswordRequired: "dispBlock" }) : this.setState({ loginPasswordRequired: "dispNone" });
 
-        if (this.state.username === "" || this.state.loginPassword === "") { return }        
-        
+        if (this.state.username === "" || this.state.loginPassword === "") { return }
+
         // Setting the default username and Instagram access-token
         if (this.state.username === "admin" && this.state.loginPassword === "admin") {
-            sessionStorage.setItem('username','admin');
+            sessionStorage.setItem('username', 'admin');
             sessionStorage.setItem('access-token', 'IGQVJVcFI5Yk5ZAUFBVd3NUc0dER0lJZAXJfczB6UFFGV3pJRW13RV9GbEVoUk92QlNWZAlV1NlZAUOGRseGlENFVsMHBncWlQaG9hUS1iUE5JbGsxcWM2cU1tcXVjRlk4Y0todkJwNzJsYzQwWHZAYRFdsSgZDZD');
             this.setState({ loggedIn: true });
 
@@ -62,9 +62,9 @@ class Login extends Component {
         }
     }
 
-    navigateToHome = () =>{
+    navigateToHome = () => {
         this.props.history.push('/home');
-      }
+    }
 
     inputUsernameChangeHandler = event => {
         this.setState({ username: event.target.value });
@@ -78,19 +78,19 @@ class Login extends Component {
         return (
             <div className="main-container">
                 <Header
-                  screen={"Login"}/>
+                    screen={"Login"} />
                 <Card style={styles.card}>
                     <CardContent>
                         <Typography style={styles.title}> LOGIN </Typography><br />
-                        <FormControl required style={{width: '100%'}}>
+                        <FormControl required style={{ width: '100%' }}>
                             <InputLabel htmlFor="username"> Username </InputLabel>
                             <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler} />
                             <FormHelperText className={this.state.usernameRequired}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
-                        <FormControl required style={{width: '100%'}}>
+                        <FormControl required style={{ width: '100%' }}>
                             <InputLabel htmlFor="password"> Password </InputLabel>
                             <Input id="password" type="password" onChange={this.inputLoginPasswordChangeHandler} />
-                            <FormHelperText className={this.state.loginPasswordRequired }><span className="red">required</span></FormHelperText>
+                            <FormHelperText className={this.state.loginPasswordRequired}><span className="red">required</span></FormHelperText>
                         </FormControl><br /><br />
                         <div className={this.state.incorrectUsernamePassword}><span className="red"> Incorrect username and/or password </span></div><br />
                         <Button variant="contained" color="primary" onClick={this.loginClickHandler}> LOGIN </Button>
