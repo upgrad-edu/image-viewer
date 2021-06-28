@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Header.css';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -30,7 +30,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color:'#000000'
+    color: '#000000'
   },
   inputInput: {
     paddingTop: theme.spacing.unit,
@@ -50,106 +50,106 @@ const styles = theme => ({
     width: 50,
     height: 50,
   },
-  appHeader:{
-    backgroundColor:'#263238'
+  appHeader: {
+    backgroundColor: '#263238'
   },
-  hr:{
-    height:'1.5px',
-    backgroundColor:'#f2f2f2',
-    marginLeft:'5px',
-    marginRight:'5px'
+  hr: {
+    height: '1.5px',
+    backgroundColor: '#f2f2f2',
+    marginLeft: '5px',
+    marginRight: '5px'
   }
 })
 
-class Header extends Component{
+class Header extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       anchorEl: null
     };
   }
 
-  render(){
-    const {classes,screen} = this.props;
+  render() {
+    const { classes, screen } = this.props;
     return (<div>
-        <AppBar className={classes.appHeader}>
-          <Toolbar>
-            { /* Display Logo on all three pages */ }
+      <AppBar className={classes.appHeader}>
+        <Toolbar>
+          { /* Display Logo on all three pages */}
 
-            {(screen === "Login" || screen === "Home") && <span className="header-logo">Image Viewer</span>}
-            {(screen === "Profile") && <Link style={{ textDecoration: 'none', color: 'white' }} to="/home"><span className="header-logo">Image Viewer</span></Link>}
-            <div className={classes.grow}/>
+          {(screen === "Login" || screen === "Home") && <span className="header-logo">Image Viewer</span>}
+          {(screen === "Profile") && <Link style={{ textDecoration: 'none', color: 'white' }} to="/home"><span className="header-logo">Image Viewer</span></Link>}
+          <div className={classes.grow} />
 
-            { /* Display Search Bar on Home Page */ }
-            {(screen === "Home") &&
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase onChange={(e)=>{this.props.searchHandler(e.target.value)}} placeholder="Search…" classes={{
-                    input: classes.inputInput
-                  }}/>
+          { /* Display Search Bar on Home Page */}
+          {(screen === "Home") &&
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
               </div>
-            }
+              <InputBase onChange={(e) => { this.props.searchHandler(e.target.value) }} placeholder="Search…" classes={{
+                input: classes.inputInput
+              }} />
+            </div>
+          }
 
-            { /* Display profile Icon on Home and Profile page */ }
-            {(screen === "Home" || screen === "Profile")  &&
-              <div>
-                <IconButton onClick={this.handleClick}>
-                  <Avatar alt="Profile Pic" src="profile.png" className={classes.avatar} style={{border: "1px solid #fff"}}/>
-                </IconButton>
-                <Popover
-                  id="simple-menu"
-                  anchorEl={this.state.anchorEl}
-                  open={Boolean(this.state.anchorEl)}
-                  onClose={this.handleClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                  }}>
-                    <div style={{padding:'5px'}}>
+          { /* Display profile Icon on Home and Profile page */}
+          {(screen === "Home" || screen === "Profile") &&
+            <div>
+              <IconButton onClick={this.handleClick}>
+                <Avatar alt="Profile Pic" src="profile.png" className={classes.avatar} style={{ border: "1px solid #fff" }} />
+              </IconButton>
+              <Popover
+                id="simple-menu"
+                anchorEl={this.state.anchorEl}
+                open={Boolean(this.state.anchorEl)}
+                onClose={this.handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}>
+                <div style={{ padding: '5px' }}>
 
-                      { /* Display Account & Logout on Home Page */ }
-                      { (screen === "Home") &&
-                        <div>
-                          <MenuItem onClick={this.handleAccount}>My Account</MenuItem>
-                          <div className={classes.hr}/>
-                        </div>
-                      }
-                      <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                  { /* Display Account & Logout on Home Page */}
+                  {(screen === "Home") &&
+                    <div>
+                      <MenuItem onClick={this.handleAccount}>My Account</MenuItem>
+                      <div className={classes.hr} />
                     </div>
-                </Popover>
-              </div>
-            }
-          </Toolbar>
-        </AppBar>
+                  }
+                  <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                </div>
+              </Popover>
+            </div>
+          }
+        </Toolbar>
+      </AppBar>
     </div>)
   }
 
-  handleClick = (event) =>{
+  handleClick = (event) => {
     this.setState({
       anchorEl: event.currentTarget
     })
   }
 
-  handleAccount = ()=>{
+  handleAccount = () => {
     // Navigate to Profile Page
     this.props.handleAccount();
     this.handleClose();
   }
 
-  handleLogout = ()=>{
+  handleLogout = () => {
     // Logout User
     this.props.handleLogout();
     this.handleClose();
   }
 
-  handleClose = () =>{
+  handleClose = () => {
     this.setState({ anchorEl: null });
   }
 }
