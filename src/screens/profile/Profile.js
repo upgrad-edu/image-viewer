@@ -66,6 +66,47 @@ class Profile extends Component {
             likes: 3
         }
     }
+    getBaseUserInfo = () => {
+        let that = this;
+        let url = `${constants.userInfoUrl}=${sessionStorage.getItem('access-token')}`;
+        return fetch(url,{
+            method:'GET',
+        }).then((response) =>{
+            return response.json();
+        }).then((jsonResponse) =>{
+            that.setState({
+                userInfo:jsonResponse.data
+            });
+            this.state.userInfo.map((data, index) => (
+                this.getMediaData(data.id)
+            ));
+        }).catch((error) => {
+            console.log('error user data',error);
+        });
+    }
+
+    getMediaData = (id) => {
+        let that = this;
+        let url = `${constants.userMediaUrl}/${id}?fields=id,media_type,media_url,username,timestamp&access_token=&access_token=${sessionStorage.getItem('access-token')}`;
+        return fetch(url,{
+            method:'GET',
+        }).then((response) =>{
+            return response.json();
+        }).then((jsonResponse) =>{
+            that.setState({
+                filteredData: this.state.filteredData.concat(jsonResponse),
+                username: jsonResponse.username
+            })
+        }).catch((error) => {
+            console.log('error user data',error);
+        });
+    }
+
+    logout = () => {
+        sessionStorage.clear();
+        this.props.history.replace('/');
+    }
+    
     render(){
         let likeCount = this.state.likes;
         return(
