@@ -9,7 +9,8 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "2.0.4"
+    "react-scripts": "2.0.4",
+    "util": "^0.12.4"
   },
   "scripts": {
     "start": "react-scripts start",
